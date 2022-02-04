@@ -63,8 +63,8 @@ sap_hana_sps: "0"
 
 # List of RHEL packages to be installed for SAP HANA. For RHEL 8 and later, you can choose to install either the default list
 #   or a list of the minimum required packages for SAP HANA server:
-sap_hana_preconfigure_packages: "{{ __sap_hana_preconfigure_packages }}"
-#sap_hana_preconfigure_packages: "{{ __sap_hana_preconfigure_packages_min_install }}"
+#sap_hana_preconfigure_packages: "{{ __sap_hana_preconfigure_packages }}"
+sap_hana_preconfigure_packages: "{{ __sap_hana_preconfigure_packages_min_install }}"
 
 # SAP HANA requires certain minimum package versions to be supported. These mininum levels are listed in SAP Note 2235581.
 # Set to no if you want to ignore these requirements.
