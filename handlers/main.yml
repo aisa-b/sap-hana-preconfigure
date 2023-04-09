@@ -7,7 +7,7 @@
   register: __sap_hana_preconfigure_register_stat_sys_firmware_efi
   listen: __sap_hana_preconfigure_regenerate_grub2_conf_handler
   when:
-    - sap_hana_preconfigure_run_grub2_mkconfig|d(true)
+    - sap_hana_preconfigure_run_grub2_mkconfig|d(false)
 
 - name: Display stat of /sys/firmware/efi
   debug:
