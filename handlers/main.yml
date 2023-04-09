@@ -14,7 +14,7 @@
     var: __sap_hana_preconfigure_register_stat_sys_firmware_efi.stat.exists
   listen: __sap_hana_preconfigure_regenerate_grub2_conf_handler
   when:
-    - sap_hana_preconfigure_run_grub2_mkconfig|d(true)
+    - sap_hana_preconfigure_run_grub2_mkconfig|d(false)
 
 - name: "Run grub-mkconfig (BIOS mode)"
   command: grub2-mkconfig -o /boot/grub2/grub.cfg
@@ -23,7 +23,7 @@
   notify: __sap_hana_preconfigure_reboot_handler
   when:
     - not __sap_hana_preconfigure_register_stat_sys_firmware_efi.stat.exists
-    - sap_hana_preconfigure_run_grub2_mkconfig|d(true)
+    - sap_hana_preconfigure_run_grub2_mkconfig|d(false)
 
 - name: BIOS - Display the output of grub2-mkconfig
   debug:
@@ -50,7 +50,7 @@
   listen: __sap_hana_preconfigure_regenerate_grub2_conf_handler
   when:
     - __sap_hana_preconfigure_register_stat_sys_firmware_efi.stat.exists
-    - sap_hana_preconfigure_run_grub2_mkconfig|d(true)
+    - sap_hana_preconfigure_run_grub2_mkconfig|d(false)
 
 - name: "Run grubby"
   command: grubby --args="tsx=on" --update-kernel=ALL
@@ -70,7 +70,7 @@
     msg: Reboot is required!
   listen: __sap_hana_preconfigure_reboot_handler
   when:
-    - sap_hana_preconfigure_fail_if_reboot_required|d(true)
+    - sap_hana_preconfigure_fail_if_reboot_required|d(false)
     - not sap_hana_preconfigure_reboot_ok|d(false)
 
 - name: Show a warning message if a reboot is required
@@ -78,5 +78,5 @@
     msg: "WARN: Reboot is required!"
   listen: __sap_hana_preconfigure_reboot_handler
   when:
-    - not sap_hana_preconfigure_fail_if_reboot_required|d(true)
+    - not sap_hana_preconfigure_fail_if_reboot_required|d(false)
     - not sap_hana_preconfigure_reboot_ok|d(false)
